@@ -4,5 +4,21 @@ const DISEASENAME = '질환명을 입력해 주세요.';
 const SEARCH = '검색';
 const NONSEARCH = '검색어 없음';
 const ONE_MINUTE = 1000 * 60;
-const MAXLENGTH = 7;
-export { TITLE, TITLE2, DISEASENAME, SEARCH, NONSEARCH, ONE_MINUTE, MAXLENGTH };
+const MAXLENGTH = 6;
+const ARROWDOWN = 'ArrowDown';
+const ARROWUP = 'ArrowUp';
+const ESCAPE = 'Escape';
+const ENTER = 'Enter';
+export {
+  TITLE,
+  TITLE2,
+  DISEASENAME,
+  SEARCH,
+  NONSEARCH,
+  ONE_MINUTE,
+  MAXLENGTH,
+  ARROWDOWN,
+  ARROWUP,
+  ESCAPE,
+  ENTER,
+};

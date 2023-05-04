@@ -2,19 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { NONSEARCH } from '../static/constants';
 
-const RecommendBoxComponent = ({ recommend, cursor }: any) => {
+const RecommendBoxComponent = ({ recommend, cursor, inputRef }: any) => {
+  const recommendClickHandle = (e: React.MouseEvent<HTMLLIElement>) => {
+    inputRef.current!.value = e.currentTarget!.innerText;
+  };
   return (
     <Hidden>
       <RecommendBox>
-        {recommend?.length === 0 ? (
+        {recommend?.length === 0 || undefined ? (
           <SearchNone>{NONSEARCH}</SearchNone>
         ) : (
           <RecommendLists>
-            {recommend?.map((word: any, index: any) => {
+            {recommend?.map((word: any, index: string) => {
               return (
                 <li
                   key={word.id}
                   style={index === cursor ? { backgroundColor: '#ededed' } : {}}
+                  onClick={recommendClickHandle}
                 >
                   {word.name}
                 </li>

@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import { getRecommendWord } from './api/inputApi';
 import RecommendBoxComponent from './components/RecommendBox';
 import {
+  ARROWDOWN,
+  ARROWUP,
   DISEASENAME,
+  ENTER,
+  ESCAPE,
   MAXLENGTH,
   SEARCH,
   TITLE,
@@ -21,20 +25,18 @@ function App() {
   const [text, setText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [cursor, setCursor] = useState<number>(-1);
-  const keyboardNavigation = (e: any) => {
-    if (e.key === 'ArrowDown') {
+  const keyboardNavigation = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ARROWDOWN) {
       setCursor((prev) => (prev < MAXLENGTH ? (prev + 1) % MAXLENGTH : prev));
     }
-    if (e.key === 'ArrowUp') {
+    if (e.key === ARROWUP) {
       setCursor((prev) => (prev > 0 ? prev - 1 : MAXLENGTH - 1));
     }
-    if (e.key === 'Escape') {
+    if (e.key === ESCAPE) {
       setCursor(-1);
     }
-    if (e.key === 'Enter') {
-      alert('결과화면으로 이동');
+    if (e.key === ENTER) {
       inputRef.current!.value = recommend[cursor].name;
-      console.log(recommend[2]);
       setCursor(-1);
     }
   };
@@ -48,7 +50,6 @@ function App() {
       if (text) {
         const result = await getRecommendWord(text);
         setRecommend(result);
-        console.info('calling api');
       }
     }, 500);
     return () => clearTimeout(timer);
@@ -75,7 +76,12 @@ function App() {
           ></input>
           <InputButton>{SEARCH}</InputButton>
         </InputBox>
-        <RecommendBoxComponent cursor={cursor} recommend={recommend} />
+        <RecommendBoxComponent
+          inputRef={inputRef}
+          cursor={cursor}
+          setCursor={setCursor}
+          recommend={recommend}
+        />
       </View>
     </MainPage>
   );
