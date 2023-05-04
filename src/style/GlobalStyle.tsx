@@ -28,6 +28,7 @@ time, mark, audio, video {
 	
 }
 html {
+				box-sizing: border-box;
         font-size: 62.5%; // 10px
         @media (max-width: 768px) {
           // 태블릿
@@ -46,6 +47,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	
 }
 ol, ul {
 	list-style: none;
