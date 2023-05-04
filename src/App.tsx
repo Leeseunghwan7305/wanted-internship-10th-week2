@@ -9,6 +9,22 @@ function App() {
   const [recommend, setRecommend] = useState([]);
   const [text, setText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [cursor, setCursor] = useState<number>(-1);
+  const keyboardNavigation = (e: any) => {
+    if (e.key === 'ArrowDown') {
+      setCursor((prev) => (prev < 16 ? prev + 1 : prev));
+    }
+    if (e.key === 'ArrowUp') {
+      setCursor((prev) => (prev > 0 ? prev - 1 : 0));
+    }
+    if (e.key === 'Escape') {
+      setCursor(-1);
+    }
+    if (e.key === 'Enter') {
+      alert('결과화면으로 이동');
+      setCursor(-1);
+    }
+  };
 
   const recommendHandle = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -39,13 +55,14 @@ function App() {
             <AiOutlineSearch size="20" color="#fffff" />
           </div>
           <input
+            onKeyDown={keyboardNavigation}
             onChange={recommendHandle}
             ref={inputRef}
             placeholder={DISEASENAME}
           ></input>
           <InputButton>{SEARCH}</InputButton>
         </InputBox>
-        <RecommendBoxComponent recommend={recommend} />
+        <RecommendBoxComponent cursor={cursor} recommend={recommend} />
       </View>
     </MainPage>
   );

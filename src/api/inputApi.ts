@@ -9,12 +9,13 @@ export const getRecommendWord = async (word: string) => {
     try {
       console.log('fetch');
       const res = await client.get(`/search-conditions/?name=${word}`);
+      const newData = res.data.splice(1, 7);
       const object = {
-        data: res.data,
+        data: newData,
         expireTime: new Date().getTime() + ONE_MINUTE,
       };
       localStorage.setItem(word, JSON.stringify(object));
-      return res.data;
+      return newData;
     } catch (e) {
       console.log(e);
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { NONSEARCH } from '../static/constants';
 
-const RecommendBoxComponent = ({ recommend }: any) => {
+const RecommendBoxComponent = ({ recommend, cursor }: any) => {
   return (
     <Hidden>
       <RecommendBox>
