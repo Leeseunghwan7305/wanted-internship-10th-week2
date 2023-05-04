@@ -35,7 +35,7 @@ const RecommendBox = styled.div`
   left: calc(50% - 24.5rem);
   right: 0;
   width: 49rem;
-  height: 200px;
+  min-height: 100px;
   overflow-y: scroll;
   border-radius: 10px;
   background-color: white;
@@ -49,7 +49,7 @@ const RecommendBox = styled.div`
 `;
 const RecommendLists = styled.ul`
   & > li {
-    padding: 0.5rem;
+    padding: 1rem;
     font-size: 1.2rem;
   }
 
