@@ -1,4 +1,4 @@
-import { ONE_MINUTE } from '../static/constants';
+import { MAXLENGTH, ONE_MINUTE } from '../static/constants';
 import { client } from './axiosCustom';
 
 export const getRecommendWord = async (word: string) => {
@@ -9,7 +9,7 @@ export const getRecommendWord = async (word: string) => {
     try {
       console.log('fetch');
       const res = await client.get(`/search-conditions/?name=${word}`);
-      const newData = res.data.splice(1, 7);
+      const newData = res.data.splice(1, MAXLENGTH);
       const object = {
         data: newData,
         expireTime: new Date().getTime() + ONE_MINUTE,
@@ -21,3 +21,4 @@ export const getRecommendWord = async (word: string) => {
     }
   }
 };
+//캐시 스토리지

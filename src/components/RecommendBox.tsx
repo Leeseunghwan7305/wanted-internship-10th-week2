@@ -10,8 +10,15 @@ const RecommendBoxComponent = ({ recommend, cursor }: any) => {
           <SearchNone>{NONSEARCH}</SearchNone>
         ) : (
           <RecommendLists>
-            {recommend?.map((word: any) => {
-              return <li key={word.id}>{word.name}</li>;
+            {recommend?.map((word: any, index: any) => {
+              return (
+                <li
+                  key={word.id}
+                  style={index === cursor ? { backgroundColor: '#ededed' } : {}}
+                >
+                  {word.name}
+                </li>
+              );
             })}
           </RecommendLists>
         )}

@@ -3,25 +3,38 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
 import { getRecommendWord } from './api/inputApi';
 import RecommendBoxComponent from './components/RecommendBox';
-import { DISEASENAME, SEARCH, TITLE, TITLE2 } from './static/constants';
+import {
+  DISEASENAME,
+  MAXLENGTH,
+  SEARCH,
+  TITLE,
+  TITLE2,
+} from './static/constants';
+
+type recommendType = {
+  name: string;
+  id: number;
+};
 
 function App() {
-  const [recommend, setRecommend] = useState([]);
+  const [recommend, setRecommend] = useState<recommendType[]>([]);
   const [text, setText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [cursor, setCursor] = useState<number>(-1);
   const keyboardNavigation = (e: any) => {
     if (e.key === 'ArrowDown') {
-      setCursor((prev) => (prev < 16 ? prev + 1 : prev));
+      setCursor((prev) => (prev < MAXLENGTH ? (prev + 1) % MAXLENGTH : prev));
     }
     if (e.key === 'ArrowUp') {
-      setCursor((prev) => (prev > 0 ? prev - 1 : 0));
+      setCursor((prev) => (prev > 0 ? prev - 1 : MAXLENGTH - 1));
     }
     if (e.key === 'Escape') {
       setCursor(-1);
     }
     if (e.key === 'Enter') {
       alert('결과화면으로 이동');
+      inputRef.current!.value = recommend[cursor].name;
+      console.log(recommend[2]);
       setCursor(-1);
     }
   };
